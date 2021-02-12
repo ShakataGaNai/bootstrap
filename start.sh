@@ -7,6 +7,9 @@ mkdir ~/Wallpapers
 mkdir ~/Desktop/Screenshots
 mkdir ~/.ssh/
 chmod 700 ~/.ssh/
+mkdir -p ~/.config/git/template
+echo "ref: refs/heads/main" |tee -a ~/.config/git/template/HEAD
+
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew update
