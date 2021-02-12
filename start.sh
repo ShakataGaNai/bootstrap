@@ -1,5 +1,7 @@
 sudo -v
-BLUE='\033[0;34m'; RED='\033[0;31m'; NC='\033[0m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+NC='\033[0m'
 
 #!/usr/bin/env zsh
 mkdir ~/Development
@@ -8,8 +10,7 @@ mkdir ~/Desktop/Screenshots
 mkdir ~/.ssh/
 chmod 700 ~/.ssh/
 mkdir -p ~/.config/git/template
-echo "ref: refs/heads/main" |tee -a ~/.config/git/template/HEAD
-
+echo "ref: refs/heads/main" | tee -a ~/.config/git/template/HEAD
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew update
@@ -46,7 +47,6 @@ brew tap homebrew/cask-fonts
 # https://github.com/Homebrew/homebrew-cask-fonts/tree/master/Casks
 brew install --cask font-droid-sans-mono-nerd-font
 
-
 brew install git-lfs
 git lfs install
 
@@ -57,10 +57,10 @@ osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'"
 #brew tap dteoh/sqa
 #brew install --cask slowquitapps
 
-declare -a Apps=("Brave Browser" "iTerm"  "Telegram" "Inkdrop" "Todoist" "Visual Studio Code" "1Password 7" "Discord")
+declare -a Apps=("Brave Browser" "iTerm" "Telegram" "Inkdrop" "Todoist" "Visual Studio Code" "1Password 7" "Discord")
 for val in "${Apps[@]}"; do
-  # For some reason I cannot get this to work via JSON. But the XML version works fine.
-  defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/'"$val"'.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+    # For some reason I cannot get this to work via JSON. But the XML version works fine.
+    defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/'"$val"'.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
 done
 killall Dock
 
@@ -78,7 +78,6 @@ ln -s $PWD/dotfiles/gitconfig ~/.gitconfig
 ln -s $PWD/dotfiles/tmux.conf ~/.tmux.conf
 ln -s $PWD/dotfiles/curlrc ~/.curlrc
 ln -s $PWD/dotfiles/ssh-config ~/.ssh/config
-
 
 ZSH_CUSTOM=~/.oh-my-zsh/custom/
 ln -s $PWD/dotfiles/agnostersgn.zsh-theme $ZSH_CUSTOM/agnostersgn.zsh-theme
