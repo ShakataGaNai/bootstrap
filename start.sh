@@ -77,6 +77,8 @@ rm ~/.gitconfig
 ln -s $PWD/dotfiles/gitconfig ~/.gitconfig
 ln -s $PWD/dotfiles/tmux.conf ~/.tmux.conf
 ln -s $PWD/dotfiles/curlrc ~/.curlrc
+ln -s $PWD/dotfiles/ssh-config ~/.ssh/config
+
 
 ZSH_CUSTOM=~/.oh-my-zsh/custom/
 ln -s $PWD/dotfiles/agnostersgn.zsh-theme $ZSH_CUSTOM/agnostersgn.zsh-theme

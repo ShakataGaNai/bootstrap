@@ -1,0 +1,4 @@
+Host *.obv.sh
+  ForwardAgent yes
+  ServerAliveInterval 120
+  ProxyCommand /usr/local/bin/cloudflared access ssh --hostname %h
