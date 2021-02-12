@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+################
+# From: 
+# Updates by: Jon 'ShakataGaNai' Davis
+# Original Source: https://github.com/mathiasbynens/dotfiles
+#################
+
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
@@ -591,6 +597,10 @@ open "${HOME}/Solarized Dark.itermcolors"
 # Prompt on quit
 defaults write com.googlecode.iterm2 PromptOnQuit -bool true
 
+# Specify the preferences directory
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${HOME}/Development/dotfiles-macos/dotfiles/iterm2"
+# Tell iTerm2 to use the custom preferences in the directory
+defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
 ###############################################################################
 # Time Machine                                                                #

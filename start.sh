@@ -19,7 +19,7 @@ brew install --cask 1password
 brew install --cask visual-studio-code
 brew install --cask inkdrop
 brew install python@3
-brew install asciinema ansible thefuck htop mtr pwgen
+brew install asciinema ansible thefuck htop mtr pwgen nano lsd
 
 # Kubernetes Related
 brew install k9s kubectl
@@ -43,7 +43,6 @@ brew tap homebrew/cask-fonts
 # https://github.com/Homebrew/homebrew-cask-fonts/tree/master/Casks
 brew install --cask font-droid-sans-mono-nerd-font
 
-brew install lsd 
 
 brew install git-lfs
 git lfs install
@@ -66,12 +65,15 @@ killall Dock
 curl -Lo ~/.dircolors.256dark https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark
 printf "${BLUE}####### ${RED}Once oh-my-zsh starts zsh, exit it to complete setup proccess ${BLUE}######${NC}\n"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+## Do some dotfiles
 rm ~/.zshrc
 ln -s $PWD/dotfiles/zshrc ~/.zshrc
 ln -s $PWD/dotfiles/nanorc ~/.nanorc
 rm ~/.gitconfig
 ln -s $PWD/dotfiles/gitconfig ~/.gitconfig
-
+ln -s $PWD/dotfiles/tmux.conf ~/.tmux.conf
+ln -s $PWD/dotfiles/curlrc ~/.curlrc
 
 ZSH_CUSTOM=~/.oh-my-zsh/custom/
 ln -s $PWD/dotfiles/agnostersgn.zsh-theme $ZSH_CUSTOM/agnostersgn.zsh-theme
@@ -82,3 +84,5 @@ curl -L https://iterm2.com/shell_integration/zsh -o ~/.iterm2_shell_integration.
 brew install zsh-syntax-highlighting
 chmod -R go-w '/usr/local/share/zsh'
 chmod -R go-w '/usr/local/share/zsh-completions'
+
+./macos-defaults.sh

@@ -69,13 +69,12 @@ ZSH_THEME="agnostersgn"
 export UPDATE_ZSH_DAYS=7
 export HIST_STAMPS="yyyy-mm-dd"
 source $ZSH/oh-my-zsh.sh
-#export GOPATH=~/Development/gosrc
 export MICRO_TRUECOLOR=1
 
 if [ $MACOS ]; then
     plugin=(battery iterm2)
     eval `gdircolors ~/.dircolors.256dark`
-    export PATH="/usr/local/sbin:/usr/local/opt/go/libexec/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/snap/bin:$PATH"
+    export PATH="/usr/local/sbin:/usr/local/opt/go/libexec/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/curl/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/snap/bin:$PATH"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 else
     eval `dircolors ~/.dircolors.256dark`
