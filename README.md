@@ -10,6 +10,6 @@ The goal is to provide a "one line to fully useful" machine. Installing all majo
 
 While most of the scripts and dot files are not-hard coded with too much "me specific" data or locations, there are still a few. Reccomend you fork this repo and look through each script to modify for your own needs.
 
-## [License](/License)
+## [License](/LICENSE)
 
 MIT
