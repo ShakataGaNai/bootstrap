@@ -110,8 +110,8 @@ source ${HOME}/.iterm2_shell_integration.zsh
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 
+alias lols="ls | lolcat"
 alias ls="lsd --color=always"
-alias lols="ls --color=no | lolcat"
 
 if [[ "$ZPROF" = true ]]; then
     zprof
@@ -121,6 +121,4 @@ profzsh() {
     shell=${1-$SHELL}
     ZPROF=true $shell -i -c exit
 }
-
-#eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 

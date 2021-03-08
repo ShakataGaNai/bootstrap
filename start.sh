@@ -23,10 +23,11 @@ brew install --cask 1password
 brew install --cask visual-studio-code
 brew install --cask inkdrop
 brew install python@3
-brew install asciinema ansible thefuck htop mtr pwgen nano lsd
+brew install asciinema ansible thefuck htop mtr pwgen nano lsd diff-so-fancy lolcat spotify tree
+brew install cloudflare/cloudflare/cloudflared
 
 # Kubernetes Related
-brew install k9s kubectl
+brew install k9s kubectl helm
 brew install --cask lens
 
 brew install coreutils
