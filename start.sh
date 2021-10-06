@@ -9,19 +9,22 @@ mkdir ~/Wallpapers
 mkdir ~/Desktop/Screenshots
 mkdir ~/.ssh/
 chmod 700 ~/.ssh/
-mkdir -p ~/.config/git/template
-echo "ref: refs/heads/main" | tee -a ~/.config/git/template/HEAD
+#mkdir -p ~/.config/git/template
+#echo "ref: refs/heads/main" | tee -a ~/.config/git/template/HEAD
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew update
 brew upgrade
 brew install --cask iterm2
 brew install --cask brave-browser
+brew install --cask google-chrome
+brew install --cask firefox
 brew install --cask telegram
 brew install --cask discord
 brew install --cask 1password
 brew install --cask visual-studio-code
 brew install --cask inkdrop
+brew install --cask obsidian
 brew install python@3
 brew install asciinema ansible thefuck htop mtr pwgen nano lsd diff-so-fancy lolcat spotify tree
 brew install cloudflare/cloudflare/cloudflared
@@ -58,7 +61,7 @@ osascript -e 'tell application "Finder" to set desktop picture to POSIX file "'"
 #brew tap dteoh/sqa
 #brew install --cask slowquitapps
 
-declare -a Apps=("Brave Browser" "iTerm" "Telegram" "Inkdrop" "Todoist" "Visual Studio Code" "1Password 7" "Discord")
+declare -a Apps=("Brave Browser" "Google Chrome" "Firefox" "iTerm" "Telegram" "Inkdrop" "Obsidian" "Todoist" "Visual Studio Code" "1Password 7" "Discord")
 for val in "${Apps[@]}"; do
     # For some reason I cannot get this to work via JSON. But the XML version works fine.
     defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/'"$val"'.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
