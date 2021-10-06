@@ -327,7 +327,7 @@ build_prompt() {
   prompt_dir
   prompt_git
 #  prompt_awsprofile
-  prompt_kubecontext
+#  prompt_kubecontext
 #  prompt_music
   prompt_end
   CURRENT_BG='NONE'

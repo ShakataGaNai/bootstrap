@@ -4,8 +4,7 @@
 	name = Jon Davis
 
 [init]
-	# Join 2021, move away from master as default
-	templateDir = ~/.config/git/template/
+        defaultBranch = main
 
 [log]
 	date = local

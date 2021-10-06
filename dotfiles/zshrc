@@ -71,16 +71,10 @@ export HIST_STAMPS="yyyy-mm-dd"
 source $ZSH/oh-my-zsh.sh
 export MICRO_TRUECOLOR=1
 
-if [ $MACOS ]; then
-    plugin=(battery iterm2)
-    eval `gdircolors ~/.dircolors.256dark`
-    export PATH="/usr/local/sbin:/usr/local/opt/go/libexec/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/curl/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/snap/bin:$PATH"
-    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-else
-    eval `dircolors ~/.dircolors.256dark`
-    export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/snap/bin:/usr/games"
-fi
-#export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin
+plugin=(battery iterm2)
+eval `gdircolors ~/.dircolors.256dark`
+export PATH="/opt/homebrew/bin:/usr/local/sbin:/usr/local/opt/go/libexec/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/curl/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/snap/bin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 TF_ALIAS=fuck alias fuck='eval $(thefuck $(fc -ln -1 | tail -n 1)); fc -R'
 alias pwgen="pwgen -Cs 30 1"
