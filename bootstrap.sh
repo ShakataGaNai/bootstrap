@@ -4,9 +4,9 @@
 
 doPause() {
   local msg="${1:-Press Enter to continue or Ctrl+C to exit...}"
-  echo -n "$msg"
-  read -k 1 -s < /dev/tty
-  echo
+  echo "$msg"
+  #read -k 1 -s < /dev/tty
+  #echo
 }
 
 doPause "Keystroke testing"
@@ -98,6 +98,7 @@ fi
 echo "Installing all apps"
 brew install dockutil
 brew install mas
+
 brew install --cask iterm2
 brew install --cask brave-browser
 brew install --cask google-chrome
@@ -132,6 +133,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 brew tap bramstein/webfonttools
 brew install sfnt2woff sfnt2woff-zopfli woff2
 
+brew install --cask font-meslo-lg-nerd-font
 brew install --cask font-droid-sans-mono-nerd-font
 brew install --cask font-atkinson-hyperlegible
 brew install --cask font-atkinson-hyperlegible-mono
@@ -148,6 +150,8 @@ cp ~/Development/dotfiles-macos/dotfiles/nanorc ~/.nanorc
 cp ~/Development/dotfiles-macos/dotfiles/tmux.conf ~/.tmux.conf
 cp ~/Development/dotfiles-macos/dotfiles/curlrc ~/.curlrc
 cp ~/Development/dotfiles-macos/dotfiles/ssh-config ~/.ssh/config
+cp ~/Development/dotfiles-macos/dotfiles/p10k.sh ~/.p10k.sh
+
 
 if [[ "$WP" == "W" ]]; then
     echo -n "Enter your work email: "
@@ -279,7 +283,7 @@ killall SystemUIServer
 curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
 
 
-doPause "Finder Favorites"
+doPause "Finder Favorites & other OAS"
 
 # Add screenshots and finder to finder favorites, can't find a better way to do this.
 osascript <<EOF
@@ -327,6 +331,28 @@ tell application "Finder"
     end tell
 end tell
 EOF
+
+# Do P10k configuration for iTerm2
+local k t v settings=(
+'"Normal Font"'                                 string '"MesloLGS-NF-Regular '18'"'
+'"Terminal Type"'                               string '"xterm-256color"'
+'"Horizontal Spacing"'                          real   1
+'"Vertical Spacing"'                            real   1
+'"Minimum Contrast"'                            real   0
+'"Use Bold Font"'                               bool   1
+'"Use Bright Bold"'                             bool   1
+'"Use Italic Font"'                             bool   1
+'"ASCII Anti Aliased"'                          bool   1
+'"Non-ASCII Anti Aliased"'                      bool   1
+'"Use Non-ASCII Font"'                          bool   0
+'"Ambiguous Double Width"'                      bool   0
+'"Draw Powerline Glyphs"'                       bool   1
+'"Only The Default BG Color Uses Transparency"' bool   1
+)
+for k t v in $settings; do
+/usr/libexec/PlistBuddy -c "Set :\"New Bookmarks\":0:$k $v" ~/Library/Preferences/com.googlecode.iterm2.plist 
+/usr/libexec/PlistBuddy -c "Add :\"New Bookmarks\":0:$k $t $v" ~/Library/Preferences/com.googlecode.iterm2.plist
+done
 
 ### Doesn't work
 # cp /System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/SidebarPicturesFolder.icns ~/Screenshots/.VolumeIcon.icns
