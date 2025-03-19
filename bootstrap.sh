@@ -18,7 +18,18 @@ if [[ "$(test_keystroke)" == "FAIL" ]]; then
     exit 1
 fi
 
-NEW_NAME="xxxCHANGEMExxx"
+read -p "Enter the new computer name: " NEW_NAME
+NEW_NAME=$(echo "$NEW_NAME" | tr '[:lower:]' '[:upper:]')
+
+while true; do
+    read -p "(W)ork or (P)ersonal? " choice
+    case "$choice" in
+        [Ww]* ) WP="W"; break;;
+        [Pp]* ) WP="P"; break;;
+        * ) echo "Please answer W or P.";;
+    esac
+done
+
 sudo scutil --set ComputerName "$NEW_NAME"
 sudo scutil --set HostName "$NEW_NAME"
 sudo scutil --set LocalHostName "$NEW_NAME"
@@ -36,35 +47,40 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 softwareupdate --install-rosetta --agree-to-license
 
 # Install Brew Apps
+
+if [[ "$WP" == "P" ]]; then
+    brew install --cask discord
+    brew install --cask audacity
+    brew install --cask obs
+    brew install --cask adobe-creative-cloud
+    brew install gitify
+    brew install ffmpeg
+    brew install yt-dlp
+
+    brew tap ShakataGaNai/cask
+    brew install --cask cavalry
+
+    brew install --cask syncthing
+    open /Applications/Syncthing.app/
+fi
+
+brew install dockutil
 brew install --cask iterm2
 brew install --cask brave-browser
 brew install --cask google-chrome
 brew install --cask firefox
 brew install --cask telegram
-brew install --cask discord
 brew install --cask visual-studio-code
 brew install --cask inkdrop
 brew install --cask obsidian
 brew install --cask 1password
+brew install 1password-cli
 brew install --cask spotify
 brew install --cask raycast
 brew install --cask zoom
 brew install --cask vlc
-brew install --cask audacity
-brew install --cask obs
 brew install --cask chatgpt
-brew install 1password-cli
 brew install github
-brew install gitify
-brew install --cask adobe-creative-cloud
-brew install ffmpeg
-brew install yt-dlp
-
-brew tap ShakataGaNai/cask
-brew install --cask cavalry
-
-brew install --cask syncthing
-open /Applications/Syncthing.app/
 brew install --cask stats
 open /Applications/Stats.app/
 brew install --cask google-drive
@@ -101,6 +117,11 @@ cp ~/Development/dotfiles-macos/dotfiles/curlrc ~/.curlrc
 cp ~/Development/dotfiles-macos/dotfiles/ssh-config ~/.ssh/config
 cp ~/Development/dotfiles-macos/dotfiles/p10k.zsh ~/.p10k.zsh
 
+if [[ "$WP" == "P" ]]; then
+    read -p "Enter your work email: " WORK_EMAIL
+    sed -i '' "s/email = github@konsoletek.com/email = $WORK_EMAIL/" ~/.gitconfig
+fi
+
 dockutil --no-restart -r Mail
 dockutil --no-restart -r Maps
 dockutil --no-restart -r Launchpad
@@ -118,10 +139,12 @@ dockutil --no-restart -a "/Applications/Brave Browser.app/" -B Safari
 dockutil --no-restart -a "/Applications/Google Chrome.app/" -B Safari
 dockutil --no-restart -a /Applications/1Password.app/ -A Safari
 dockutil --no-restart -a /Applications/Telegram.app/ -A Safari
-dockutil --no-restart -a /Applications/Discord.app/ -A Safari
 dockutil --no-restart -a /Applications/Obsidian.app/ -A Safari
 dockutil --no-restart -a "/Applications/Visual Studio Code.app/" -A Safari
 dockutil --no-restart -a /Applications/Spotify.app/ -A Music
+if [[ "$WP" == "P" ]]; then
+    dockutil --no-restart -a /Applications/Discord.app/ -A Safari
+fi
 dockutil -a /Applications/ -p beginning --display folder --view grid
 
 # Apps to install
@@ -219,10 +242,7 @@ curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utili
 
 
 
-
-
-
-
+# Add screenshots and finder to finder favorites, can't find a better way to do this.
 osascript <<EOF
 tell application "Finder"
     activate
