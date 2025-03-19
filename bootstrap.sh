@@ -121,11 +121,13 @@ brew install --cask google-drive
 brew install --cask elgato-control-center
 open /Applications/Elgato\ Control\ Center.app
 
-brew install podman kubectl helm skopeo buildah
+brew install podman kubectl helm skopeo
 brew install --cask podman-desktop
 brew install cloudflare/cloudflare/cloudflared
 brew install python@3
-brew install asciinema ansible thefuck htop mtr pwgen nano lsd diff-so-fancy lolcat tree coreutils moreutils findutils wget curl git bgit-lfs dockutil mas
+brew install asciinema ansible thefuck htop mtr pwgen nano lsd diff-so-fancy \
+ lolcat tree coreutils moreutils findutils wget curl git git-lfs
+git lfs install
 
 brew install zsh-completions zsh-autosuggestions zsh-syntax-highlighting powerlevel10k
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -139,7 +141,6 @@ brew install --cask font-atkinson-hyperlegible
 brew install --cask font-atkinson-hyperlegible-mono
 brew install --cask font-atkinson-hyperlegible-next
 
-brew install git-lfs
 curl -Lo ~/.dircolors.256dark https://raw.githubusercontent.com/seebi/dircolors-solarized/refs/heads/master/dircolors.256dark
 
 doPause "Setting up dotfiles"
@@ -184,7 +185,8 @@ dockutil --no-restart -a /Applications/Spotify.app/ -A Music
 if [[ "$WP" == "P" ]]; then
     dockutil --no-restart -a /Applications/Discord.app/ -A Safari
 fi
-dockutil -a /Applications/ -p beginning --display folder --view grid
+dockutil --no-restart -a /Applications/ -p beginning --display folder --view grid
+defaults write com.apple.dock orientation -string right && killall Dock
 
 # Apps to install
 install_apps=(
@@ -198,7 +200,6 @@ install_apps=(
  "Tailscale:1475387142"
  "OpenInterface KVM:6478481082"
  "Kagi for Safari:1622835804"
- "Reolink Client:1593161538"
  "Apple Developer:640199958"
 )
 
