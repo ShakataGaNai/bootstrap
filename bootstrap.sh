@@ -5,7 +5,7 @@
 doPause() {
   local msg="${1:-Press Enter to continue or Ctrl+C to exit...}"
   echo -n "$msg"
-  read -k 1 -s
+  read -k 1 -s < /dev/tty
   echo
 }
 
@@ -32,7 +32,7 @@ fi
 doPause "Prompts"
 
 echo -n "Enter the new computer name: "
-read computer_name
+read computer_name < /dev/tty
 NEW_NAME=$(echo "$computer_name" | tr '[:lower:]' '[:upper:]')
 
 WP=""
@@ -43,7 +43,7 @@ while [[ "$WP" != "W" && "$WP" != "P" ]]; do
     echo -e "Please select your environment type: (W)ork or (P)ersonal?"
     echo -n "> "
     
-    read choice
+    read choice < /dev/tty
     
     # Convert input to uppercase
     WP=$(echo "$choice" | tr '[:lower:]' '[:upper:]')
@@ -151,7 +151,7 @@ cp ~/Development/dotfiles-macos/dotfiles/p10k.zsh ~/.p10k.zsh
 
 if [[ "$WP" == "P" ]]; then
     echo -n "Enter your work email: "
-    read email_input
+    read email_input < /dev/tty
     sed -i '' "s/email = github@konsoletek.com/email = $email_input/" ~/.gitconfig
 fi
 
