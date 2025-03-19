@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# Invoke this script: /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ShakataGaNai/dotfiles-macos/main/bootstrap.sh)"
+# Invoke this script: /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ShakataGaNai/bootstrap/main/bootstrap.sh)"
 
 doPause() {
   local msg="${1:-Press Enter to continue or Ctrl+C to exit...}"
@@ -126,7 +126,7 @@ brew install --cask podman-desktop
 brew install cloudflare/cloudflare/cloudflared
 brew install python@3
 brew install asciinema ansible thefuck htop mtr pwgen nano lsd diff-so-fancy \
- lolcat tree coreutils moreutils findutils wget curl git git-lfs
+ lolcat tree coreutils moreutils findutils wget curl git git-lfs gh
 git lfs install
 
 brew install zsh-completions zsh-autosuggestions zsh-syntax-highlighting powerlevel10k
@@ -144,14 +144,14 @@ brew install --cask font-atkinson-hyperlegible-next
 curl -Lo ~/.dircolors.256dark https://raw.githubusercontent.com/seebi/dircolors-solarized/refs/heads/master/dircolors.256dark
 
 doPause "Setting up dotfiles"
-git clone https://github.com/ShakataGaNai/dotfiles-macos.git ~/Development/dotfiles-macos
-cp ~/Development/dotfiles-macos/dotfiles/zshrc ~/.zshrc
-cp ~/Development/dotfiles-macos/dotfiles/gitconfig ~/.gitconfig
-cp ~/Development/dotfiles-macos/dotfiles/nanorc ~/.nanorc
-cp ~/Development/dotfiles-macos/dotfiles/tmux.conf ~/.tmux.conf
-cp ~/Development/dotfiles-macos/dotfiles/curlrc ~/.curlrc
-cp ~/Development/dotfiles-macos/dotfiles/ssh-config ~/.ssh/config
-cp ~/Development/dotfiles-macos/dotfiles/p10k.sh ~/.p10k.sh
+git clone https://github.com/ShakataGaNai/bootstrap.git ~/Development/bootstrap
+cp ~/Development/bootstrap/dotfiles/zshrc ~/.zshrc
+cp ~/Development/bootstrap/dotfiles/gitconfig ~/.gitconfig
+cp ~/Development/bootstrap/dotfiles/nanorc ~/.nanorc
+cp ~/Development/bootstrap/dotfiles/tmux.conf ~/.tmux.conf
+cp ~/Development/bootstrap/dotfiles/curlrc ~/.curlrc
+cp ~/Development/bootstrap/dotfiles/ssh-config ~/.ssh/config
+cp ~/Development/bootstrap/dotfiles/p10k.sh ~/.p10k.sh
 
 
 if [[ "$WP" == "W" ]]; then

@@ -1,4 +1,12 @@
+Host *
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  User jdavis
+
 Host *.obv.sh
   ForwardAgent yes
   ServerAliveInterval 120
   ProxyCommand /opt/homebrew/bin/cloudflared access ssh --hostname %h
+
+Host github.com
+  IdentityFile ~/.ssh/id_ed25519_personal.pub
+  IdentitiesOnly yes

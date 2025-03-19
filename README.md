@@ -1,8 +1,6 @@
-# Dotfiles-macOS
+# Bootstrap (macOS)
 
-A total rebuild of my older [bootstrap repo](https://github.com/obviateio/bootstrap) specifically for use on macOS. Cobled together from multiple sources, but started on macOS 11.2 Big Sur.
-
-The goal is to provide a "one line to fully useful" machine. Installing all major applications (where possible) and setting up all the little annoying bits like fonts.
+The never ending saga of attempting to "one line" a new computer into perfect existence. Like perfection, it is impossible to atain. But we can try. 
 
 ## Want to use it?
 
