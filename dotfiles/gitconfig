@@ -1,6 +1,6 @@
 # Large portion from https://github.com/nicksp/dotfiles/blob/master/git/gitconfig
 [user]
-	email = jon@snowulf.com
+	email = github@konsoletek.com
 	name = Jon Davis
 
 [init]
@@ -14,15 +14,15 @@
 
 [alias]
 	# Reset to remote head
-	grst = !git fetch origin && git reset --hard origin/master && git status
+	grst = !git fetch origin && git reset --hard origin/main && git status
 
 	# Fetch and rebase
-	grb = !git stash && git fetch && git rebase origin/master && git stash pop
+	grb = !git stash && git fetch && git rebase origin/main && git stash pop
 
 	# Fetch and interactive-rebase
-	grbi = !git stash && git fetch && git rebase -i origin/master && git stash pop
+	grbi = !git stash && git fetch && git rebase -i origin/main && git stash pop
 
-	unfucked = !git checkout master && git fetch && git reset --hard origin/master && git clean -f -d
+	unfucked = !git checkout main && git fetch && git reset --hard origin/main && git clean -f -d
 
 	
 ###############
@@ -39,8 +39,8 @@
         # Branch
         br = branch
         branch-name = rev-parse --abbrev-ref HEAD
-        branch-diff = diff master...HEAD
-        branch-files = "!git diff master...HEAD --name-status | sed '/^D/d ; s/^.\\s\\+//'"
+        branch-diff = diff main...HEAD
+        branch-files = "!git diff main...HEAD --name-status | sed '/^D/d ; s/^.\\s\\+//'"
 
         # Commit
         c = commit
@@ -73,13 +73,13 @@
 
         # Pull
         up = pull
-        plom = pull origin master
-        plum = pull upstream master
-        preb = !git fetch upstream && git rebase upstream/master
+        plom = pull origin main
+        plum = pull upstream main
+        preb = !git fetch upstream && git rebase upstream/main
 
         # Push
         p = push
-        pom = push origin master
+        pom = push origin main
         poh = push origin head
 
         # Stash
@@ -109,9 +109,9 @@
         new = !git pull origin develop && git flow feature start
         done = !git pull origin develop && git flow feature finish "$(git symbolic-ref --short HEAD | sed -n 's/^feature\\///p')"
         go = !git checkout $1 && pull
-        master = !git checkout master && pull
+        main = !git checkout main && pull
         develop = !git checkout develop && pull
-        mmm = !git fetch origin master && git rebase origin/master
+        mmm = !git fetch origin main && git rebase origin/main
         ddd = !git fetch origin develop && git rebase origin/develop
 
         # Misc
@@ -287,3 +287,5 @@
 
 [fetch]
         prune = true
+[diff]
+	submodule = log
