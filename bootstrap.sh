@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Invoke this script: curl -s https://raw.githubusercontent.com/ShakataGaNai/dotfiles-macos/main/bootstrap.sh | bash
+
+doPause() {
+  local msg="${1:-Press Enter to continue or Ctrl+C to exit...}"
+  read -p "$msg"
+}
+
+doPause "Keystroke testing"
+
 function test_keystroke() {
   osascript <<EOF
   tell application "System Events"
@@ -18,6 +27,8 @@ if [[ "$(test_keystroke)" == "FAIL" ]]; then
     exit 1
 fi
 
+doPause "Prompts"
+
 read -p "Enter the new computer name: " NEW_NAME
 NEW_NAME=$(echo "$NEW_NAME" | tr '[:lower:]' '[:upper:]')
 
@@ -29,6 +40,10 @@ while true; do
         * ) echo "Please answer W or P.";;
     esac
 done
+
+echo "Setting up $NEW_NAME as a $WP machine."
+
+doPause "Computer name, dirs & homebrew"
 
 sudo scutil --set ComputerName "$NEW_NAME"
 sudo scutil --set HostName "$NEW_NAME"
@@ -46,9 +61,12 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Install Rosetta 2
 softwareupdate --install-rosetta --agree-to-license
 
+doPause "Installing Apps"
+
 # Install Brew Apps
 
 if [[ "$WP" == "P" ]]; then
+    echo "Installing personal apps"
     brew install --cask discord
     brew install --cask audacity
     brew install --cask obs
@@ -64,6 +82,7 @@ if [[ "$WP" == "P" ]]; then
     open /Applications/Syncthing.app/
 fi
 
+echo "Installing all apps"
 brew install dockutil
 brew install --cask iterm2
 brew install --cask brave-browser
@@ -107,7 +126,7 @@ brew install --cask font-atkinson-hyperlegible-next
 git lfs install
 curl -Lo ~/.dircolors.256dark https://raw.githubusercontent.com/seebi/dircolors-solarized/refs/heads/master/dircolors.256dark
 
-
+doPause "Setting up dotfiles"
 git clone https://github.com/ShakataGaNai/dotfiles-macos.git ~/Development/dotfiles-macos
 cp ~/Development/dotfiles-macos/dotfiles/zshrc ~/.zshrc
 cp ~/Development/dotfiles-macos/dotfiles/gitconfig ~/.gitconfig
@@ -121,6 +140,8 @@ if [[ "$WP" == "P" ]]; then
     read -p "Enter your work email: " WORK_EMAIL
     sed -i '' "s/email = github@konsoletek.com/email = $WORK_EMAIL/" ~/.gitconfig
 fi
+
+doPause "Dockutil"
 
 dockutil --no-restart -r Mail
 dockutil --no-restart -r Maps
@@ -172,6 +193,8 @@ uninstall_apps=(
  "Numbers:409203825"
 )
 
+doPause "App Store"
+
 for app in "${install_apps[@]}"; do
   name="${app%%:*}"
   id="${app##*:}"
@@ -185,6 +208,8 @@ for app in "${uninstall_apps[@]}"; do
   echo "Uninstalling $name..."
   sudo mas uninstall "$id"
 done
+
+doPause "System Preferences"
 
 defaults write com.apple.screencapture location ~/Screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
@@ -240,7 +265,7 @@ killall SystemUIServer
 curl -L https://iterm2.com/shell_integration/install_shell_integration_and_utilities.sh | bash
 
 
-
+doPause "Finder Favorites"
 
 # Add screenshots and finder to finder favorites, can't find a better way to do this.
 osascript <<EOF
