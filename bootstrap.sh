@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# Invoke this script: curl -s https://raw.githubusercontent.com/ShakataGaNai/dotfiles-macos/main/bootstrap.sh | zsh
+# Invoke this script: /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ShakataGaNai/dotfiles-macos/main/bootstrap.sh)"
 
 doPause() {
   local msg="${1:-Press Enter to continue or Ctrl+C to exit...}"
@@ -97,6 +97,7 @@ fi
 
 echo "Installing all apps"
 brew install dockutil
+brew install mas
 brew install --cask iterm2
 brew install --cask brave-browser
 brew install --cask google-chrome
@@ -136,7 +137,7 @@ brew install --cask font-atkinson-hyperlegible
 brew install --cask font-atkinson-hyperlegible-mono
 brew install --cask font-atkinson-hyperlegible-next
 
-git lfs install
+brew install git-lfs
 curl -Lo ~/.dircolors.256dark https://raw.githubusercontent.com/seebi/dircolors-solarized/refs/heads/master/dircolors.256dark
 
 doPause "Setting up dotfiles"
@@ -147,9 +148,8 @@ cp ~/Development/dotfiles-macos/dotfiles/nanorc ~/.nanorc
 cp ~/Development/dotfiles-macos/dotfiles/tmux.conf ~/.tmux.conf
 cp ~/Development/dotfiles-macos/dotfiles/curlrc ~/.curlrc
 cp ~/Development/dotfiles-macos/dotfiles/ssh-config ~/.ssh/config
-cp ~/Development/dotfiles-macos/dotfiles/p10k.zsh ~/.p10k.zsh
 
-if [[ "$WP" == "P" ]]; then
+if [[ "$WP" == "W" ]]; then
     echo -n "Enter your work email: "
     read email_input < /dev/tty
     sed -i '' "s/email = github@konsoletek.com/email = $email_input/" ~/.gitconfig
