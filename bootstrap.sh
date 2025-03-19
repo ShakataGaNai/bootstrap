@@ -230,6 +230,8 @@ done
 
 doPause "System Preferences"
 
+defaults write -g com.apple.swipescrolldirection -boolean NO
+
 defaults write com.apple.screencapture location ~/Screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 defaults write com.apple.finder NewWindowTarget -string "PfLo"
