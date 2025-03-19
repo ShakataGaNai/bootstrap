@@ -1,10 +1,12 @@
-#!/bin/bash
+#!/bin/zsh
 
-# Invoke this script: curl -s https://raw.githubusercontent.com/ShakataGaNai/dotfiles-macos/main/bootstrap.sh | bash
+# Invoke this script: curl -s https://raw.githubusercontent.com/ShakataGaNai/dotfiles-macos/main/bootstrap.sh | zsh
 
 doPause() {
   local msg="${1:-Press Enter to continue or Ctrl+C to exit...}"
-  read -p "$msg"
+  echo -n "$msg"
+  read -k 1 -s
+  echo
 }
 
 doPause "Keystroke testing"
@@ -29,16 +31,26 @@ fi
 
 doPause "Prompts"
 
-read -p "Enter the new computer name: " NEW_NAME
+echo -n "Enter the new computer name: "
+read NEW_NAME
 NEW_NAME=$(echo "$NEW_NAME" | tr '[:lower:]' '[:upper:]')
 
-while true; do
-    read -p "(W)ork or (P)ersonal? " choice
-    case "$choice" in
-        [Ww]* ) WP="W"; break;;
-        [Pp]* ) WP="P"; break;;
-        * ) echo "Please answer W or P.";;
-    esac
+WP=""
+
+# Loop until valid input received
+while [[ "$WP" != "W" && "$WP" != "P" ]]; do
+    # Request user input
+    echo -e "Please select your environment type: (W)ork or (P)ersonal?"
+    
+    read WP
+    
+    # Convert input to uppercase
+    WP=$(echo "$WP" | tr '[:lower:]' '[:upper:]')
+    
+    # Check if valid
+    if [[ "$WP" != "W" && "$WP" != "P" ]]; then
+        echo -e "Invalid selection. Please enter W or P."
+    fi
 done
 
 echo "Setting up $NEW_NAME as a $WP machine."
@@ -137,7 +149,8 @@ cp ~/Development/dotfiles-macos/dotfiles/ssh-config ~/.ssh/config
 cp ~/Development/dotfiles-macos/dotfiles/p10k.zsh ~/.p10k.zsh
 
 if [[ "$WP" == "P" ]]; then
-    read -p "Enter your work email: " WORK_EMAIL
+    echo -n "Enter your work email: "
+    read WORK_EMAIL
     sed -i '' "s/email = github@konsoletek.com/email = $WORK_EMAIL/" ~/.gitconfig
 fi
 
