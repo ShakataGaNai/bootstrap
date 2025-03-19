@@ -32,8 +32,8 @@ fi
 doPause "Prompts"
 
 echo -n "Enter the new computer name: "
-read NEW_NAME
-NEW_NAME=$(echo "$NEW_NAME" | tr '[:lower:]' '[:upper:]')
+read computer_name
+NEW_NAME=$(echo "$computer_name" | tr '[:lower:]' '[:upper:]')
 
 WP=""
 
@@ -41,11 +41,12 @@ WP=""
 while [[ "$WP" != "W" && "$WP" != "P" ]]; do
     # Request user input
     echo -e "Please select your environment type: (W)ork or (P)ersonal?"
+    echo -n "> "
     
-    read WP
+    read choice
     
     # Convert input to uppercase
-    WP=$(echo "$WP" | tr '[:lower:]' '[:upper:]')
+    WP=$(echo "$choice" | tr '[:lower:]' '[:upper:]')
     
     # Check if valid
     if [[ "$WP" != "W" && "$WP" != "P" ]]; then
@@ -150,8 +151,8 @@ cp ~/Development/dotfiles-macos/dotfiles/p10k.zsh ~/.p10k.zsh
 
 if [[ "$WP" == "P" ]]; then
     echo -n "Enter your work email: "
-    read WORK_EMAIL
-    sed -i '' "s/email = github@konsoletek.com/email = $WORK_EMAIL/" ~/.gitconfig
+    read email_input
+    sed -i '' "s/email = github@konsoletek.com/email = $email_input/" ~/.gitconfig
 fi
 
 doPause "Dockutil"
