@@ -99,6 +99,7 @@ echo "Installing all apps"
 brew install dockutil
 brew install mas
 
+brew install --cask tailscale-app
 brew install --cask iterm2
 brew install --cask brave-browser
 brew install --cask google-chrome
@@ -197,7 +198,6 @@ install_apps=(
  "Session:1521432881"
  "Slack:803453959"
  "Todoist:585829637"
- "Tailscale:1475387142"
  "OpenInterface KVM:6478481082"
  "Kagi for Safari:1622835804"
  "Apple Developer:640199958"
